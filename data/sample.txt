@@ -1,0 +1,5 @@
+I love AI and deep learning.
+Transformers learn language by predicting the next word.
+I love building neural networks from scratch.
+Deep learning is fascinating and powerful.
+Language models read text one token at a time.
