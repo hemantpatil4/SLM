@@ -286,6 +286,8 @@ def demo() -> None:
     print("\n--- Step 3: Numerical example (first block) ---")
     print(f"x[0] token IDs: {x[0].tolist()}")
     print(f"y[0] token IDs: {y[0].tolist()}")
+    # print(f"x token IDs: {x.tolist()}")
+    # print(f"y token IDs: {y.tolist()}")
     print(f"x[0] decoded:   {[tokenizer.decode([t.item()]) for t in x[0]]}")
     print(f"y[0] decoded:   {[tokenizer.decode([t.item()]) for t in y[0]]}")
     print("\nAt each column i: model sees x[0,i], must predict y[0,i] = next token")
@@ -299,7 +301,7 @@ def demo() -> None:
         print(f"\nBatch {batch_idx}:")
         print(f"  bx.shape = {tuple(bx.shape)}  (B, T) — B={bx.shape[0]} sequences, T={bx.shape[1]} positions")
         print(f"  by.shape = {tuple(by.shape)}  (B, T) — same layout, shifted targets")
-        if batch_idx == 0:
+        if batch_idx <= 1:
             print(f"  bx[0] decoded: {tokenizer.decode(bx[0].tolist())!r}")
             print(f"  by[0] decoded: {tokenizer.decode(by[0].tolist())!r}")
         if batch_idx >= 1:
@@ -311,8 +313,8 @@ def demo() -> None:
     print(f"Train examples: {len(train_set)}, Val examples: {len(val_set)}")
 
     print("\n" + "=" * 60)
-    print("Phase 1 complete. See docs/phase01_dataset_creation.md for theory.")
-    print("Next: Phase 2 (Token Embeddings) — waiting for your go-ahead.")
+    print("Phase 1 complete. See docs/phase01/theory.md for theory.")
+    print("Next: Phase 2 → python -m src.mini_gpt.phase02_embeddings")
     print("=" * 60)
 
 

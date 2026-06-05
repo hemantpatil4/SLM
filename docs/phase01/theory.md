@@ -518,11 +518,19 @@ Each arrow is one "predict next" step inside the block.
 
 Token IDs `(B, T)` will be passed through an **embedding matrix** `(V, C)` to produce `(B, T, C)` continuous vectors — one C-dimensional vector per token per position.
 
-See `SHAPES.md` for the running shape reference.
+See [`../phase02/theory.md`](../phase02/theory.md) and `SHAPES.md` for the running shape reference.
 
 ---
 
-## 10. Run & Verify
+## 10. Code Walkthrough
+
+For a **line-by-line explanation** of `phase01_dataset.py` (PyTorch, classes, `__init__`, batching before/after), see:
+
+**[`code_walkthrough.md`](code_walkthrough.md)**
+
+---
+
+## 11. Run & Verify
 
 On macOS, `python` may not exist until you activate the project venv:
 

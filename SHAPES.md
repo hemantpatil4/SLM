@@ -2,13 +2,13 @@
 
 Living document — updated as each phase is implemented.
 
-> **New to this?** Read **Section 0** in `docs/phase01_dataset_creation.md` first.
-> It explains tensors, rows, columns, BPE, and `(B, T)` in plain language.
+> **New to this?** Read **Section 0** in [`docs/phase01/theory.md`](docs/phase01/theory.md) first.
 
 **Notation:**
 - `B` = batch size (how many text chunks we process together = **number of rows**)
 - `T` = sequence length (how many tokens per chunk = **number of columns**)
 - `V` = vocabulary size (how many different tokens the tokenizer knows)
+- `C` = embedding dimension (how many features per token vector)
 
 **Remember:** A 2D tensor is like a spreadsheet. **Rows** = examples. **Columns** = token positions.
 
@@ -38,4 +38,33 @@ At position `i`: the model sees token `x[i]` and must predict token `y[i] = x[i+
 
 ---
 
-## Phase 2+: (to be added)
+## Phase 2: Token Embeddings
+
+| Tensor / Object | Shape | Dim 0 | Dim 1 | Dim 2 |
+|-----------------|-------|-------|-------|-------|
+| Input token IDs (`token_ids`) | `(B, T)` | batch example | token position | — |
+| Embedding matrix `W_E` (`weight`) | `(V, C)` | vocabulary token ID | feature dimension | — |
+| Token embeddings (output) | `(B, T, C)` | batch example | token position | feature |
+| Single token vector | `(C,)` | — | — | C features |
+| Row `k` of `W_E` | `(C,)` | — | — | embedding for token ID `k` |
+
+### Lookup Rule
+
+```
+token_ids[b, t] = k   (integer index)
+embeddings[b, t, :] = W_E[k, :]   (copy row k)
+```
+
+### Shape Journey (Phase 1 → Phase 2)
+
+```
+bx          (B, T)      integers
+   ↓ TokenEmbedding
+embeddings  (B, T, C)   floats
+```
+
+Default Mini GPT: `V=50257`, `C=128`.
+
+---
+
+## Phase 3+: (to be added)

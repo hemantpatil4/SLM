@@ -8,11 +8,15 @@ An educational project to build a decoder-only GPT-style language model from scr
 
 ```
 SLM/
-├── docs/                  # One markdown file per phase (theory + intuition)
-├── src/mini_gpt/          # PyTorch implementations (one module per phase)
-├── tests/                 # Unit tests for each phase
-├── data/                  # Small training corpora
-└── SHAPES.md              # Living reference of every tensor shape
+├── docs/
+│   ├── Prereq/           # Prerequisites (tensors)
+│   ├── phase01/          # Dataset creation
+│   ├── phase02/          # Token embeddings
+│   └── phase03/          # Positional embeddings (next)
+├── src/mini_gpt/         # PyTorch implementations (one module per phase)
+├── tests/                # Unit tests for each phase
+├── data/                 # Small training corpora
+└── SHAPES.md             # Living reference of every tensor shape
 ```
 
 ## Phases
@@ -20,7 +24,7 @@ SLM/
 | Phase | Topic | Status |
 |-------|-------|--------|
 | 1 | Dataset Creation | ✅ |
-| 2 | Token Embeddings | — |
+| 2 | Token Embeddings | ✅ |
 | 3 | Positional Embeddings | — |
 | 4 | Single-Head Masked Self-Attention | — |
 | 5 | Multi-Head Attention | — |
@@ -44,9 +48,20 @@ source .venv/bin/activate    # after this, `python` works inside the venv
 pip install -r requirements.txt
 ```
 
-## Running Phase 1
+## Docs
 
-**Option A — activate the virtual environment first (recommended):**
+See [`docs/README.md`](docs/README.md) for the full index.
+
+| Phase | Theory | Code walkthrough |
+|-------|--------|------------------|
+| 1 | `docs/phase01/theory.md` | `docs/phase01/code_walkthrough.md` |
+| 2 | `docs/phase02/theory.md` | `docs/phase02/code_walkthrough.md` |
+| Prereq | `docs/Prereq/phase00_Tensor.md` | — |
+| Shapes | `SHAPES.md` | — |
+
+## Running
+
+**Phase 1:**
 
 ```bash
 source .venv/bin/activate
@@ -54,11 +69,18 @@ python -m src.mini_gpt.phase01_dataset
 pytest tests/test_phase01_dataset.py -v
 ```
 
-**Option B — without activating (one-shot):**
+**Phase 2:**
 
 ```bash
-.venv/bin/python -m src.mini_gpt.phase01_dataset
-.venv/bin/pytest tests/test_phase01_dataset.py -v
+source .venv/bin/activate
+python -m src.mini_gpt.phase02_embeddings
+pytest tests/test_phase02_embeddings.py -v
+```
+
+**All tests:**
+
+```bash
+pytest tests/ -v
 ```
 
 ## Rules
